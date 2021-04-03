@@ -1,18 +1,16 @@
-console.log("linked");
-
 var cityListEl = document.querySelector("#city-menu");
+var cityUlEl = document.querySelector("#city-search-history");
 var currentWeather = document.querySelector("#big-weather-box");
 var fiveDayWeather = document.querySelector("#five-day-forecast");
 var weatherCard = document.querySelector("#weather-card");
 var citySearch = document.querySelector("#city-search");
-var cityInput = document.querySelector("#city-input");
+var cityInput = document.querySelector("#city-input"); 
 //var currentCard = document.querySelector(".card");
 
 //currentCard.setAttribute("display", "none");
 
 function cityClickHandler(event) {
   var whichCity = event.target.textContent;
-  console.log(whichCity);
   if (whichCity) {
     getSelectedCity(whichCity);
   }
@@ -21,7 +19,8 @@ function cityClickHandler(event) {
 function citySubmitHandler(event) {
   event.preventDefault();
   var whichCity = cityInput.value;
-  console.log(whichCity);
+    saveSearch(whichCity);
+    updateCityList();
   cityInput.value = "";
   getSelectedCity(whichCity);
 }
@@ -31,13 +30,9 @@ function getSelectedCity(theCity) {
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     theCity +
     "&units=imperial&appid=ca0a6c1724abbeafa23dfc91590ac700";
-
-  console.log(apiUrl);
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
-      console.log(response);
       response.json().then(function (data) {
-        console.log(data);
         var apiUrl2 =
           "https://api.openweathermap.org/data/2.5/onecall?lat=" +
           data.coord.lat +
@@ -47,7 +42,6 @@ function getSelectedCity(theCity) {
         fetch(apiUrl2).then(function (response2) {
           if (response2.ok) {
             response2.json().then(function (dataUV) {
-              console.log(dataUV);
               displayCity(data, dataUV);
             });
           }
@@ -70,13 +64,12 @@ function displayCity(data, dataUV) {
 
   //lets dynamically create a new weather card for the selected city
   var newCard = document.createElement("div");
-  newCard.classList = "card";
+  newCard.classList = "card bg-secondary";
   var newBody = document.createElement("div");
   newBody.classList = "card-body";
   newBody.setAttribute("id", "weather-card");
   currentWeather.appendChild(newCard);
   newCard.appendChild(newBody);
-  console.log(weatherCard);
 
   var cityEl = document.createElement("h2");
   cityEl.textContent = `${data.name} ${moment().format("MM/DD/YYYY")}`;
@@ -148,6 +141,42 @@ function displayCity(data, dataUV) {
   }
 }
 
-citySearch.addEventListener("submit", citySubmitHandler);
 
-cityListEl.addEventListener("click", cityClickHandler);
+// we need a function that will save whatever city has been searched to local storage, and populate our list with the recent search history, lets make these seperate functions
+
+//we should call this function within the citysubmithandler to save the data to local storage
+function saveSearch(theCity) {
+//check to see if there is any search history in local storage
+var searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+if(searchHistory) {
+//add the most recent search to local storage
+searchHistory.push(theCity);
+localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+} //there were no searchs in local storage, add the current search
+else {
+localStorage.setItem("searchHistory", JSON.stringify([theCity]));
+}
+}
+
+// we should call this function within the citysubmithandler to dynamically update the list of cities
+function updateCityList() {
+    //get the searchHistory from local storage
+    var searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+    //lets clear the current list elements
+    cityUlEl.innerHTML = "";
+    //we should have an array with the search history, we need to loop through this array and create list elements to place on the side bar
+    if(searchHistory){
+    for(let i=0; i<searchHistory.length; i++) {
+        var newCity = document.createElement("li");
+        newCity.classList = "list-group-item";
+        newCity.setAttribute("id", "city-menu");
+        newCity.textContent = searchHistory[i];
+        cityUlEl.appendChild(newCity);
+    }}
+
+}
+
+updateCityList();
+
+citySearch.addEventListener("submit", citySubmitHandler);
+cityUlEl.addEventListener("click", cityClickHandler);
