@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <script src="https://kit.fontawesome.com/5e4aa1d10e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather Dashboard</title>
 </head>
+
 <body>
-<header class="jumbotron bg-dark">
-    <h1 class="text-center text-white">Weather Dashboard</h1>
-</header>
-<div class="row px-3">
-
-    <div class="col-3 bg-light">
+    <header class="jumbotron bg-dark">
+        <h1 class="text-center text-white">Weather Dashboard</h1>
+    </header>
+    <div class="row px-3">
+<!-- This column is going to contain our city search form as well as our recent search history -->
+        <div class="col-3 bg-light">
             <label for="">Search for a City:</label>
-        <form class="input-group mb-3" id="city-search">
-            <input type="text" class="form-control" name="city-input" id="city-input">
-            <button class="btn btn-primary" type="submit" value="submit"><i class="fas fa-search-location"></i></button>
-        </form>
-
-        <ul class="list-group" id="city-search-history">
-        </ul>
-    </div>
-
-    <div class="col-9 bg-light p-3">
-        <div class="row p-3" id="big-weather-box">
+            <form class="input-group mb-3" id="city-search">
+                <input type="text" class="form-control" name="city-input" id="city-input">
+                <button class="btn btn-primary" type="submit" value="submit"><i
+                        class="fas fa-search-location"></i></button>
+            </form>
+            <!-- we will populate this UL with our recent search terms -->
+            <ul class="list-group" id="city-search-history">
+            </ul>
+        </div>
+<!-- This column is going to contain our current weather card as well as our 5-day forecast cards -->
+        <div class="col-9 bg-light p-3">
+            <div class="row p-3" id="big-weather-box">
             </div>
-        <div class="row" id="five-day-forecast"></div>
-    </div>
-        
+            <div class="row" id="five-day-forecast"></div>
+        </div>
     </div>
 
-</div>
-    
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="./assets/script.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
+
 </html>
