@@ -4,7 +4,7 @@ The goal of this project was to create a responsive single-page website that use
 
 ## Functionality
 
-This website functions through the use of Javascript queryselectors to get and set data to HTML elements on the page. We make use of the Open Weather Maps API in order to fetch two sets of data from their servers to provide us with all the data needed for current weather and a five day forecast. We
+This website functions through the use of Javascript queryselectors to get and set data to HTML elements on the page. We make use of the Open Weather Maps API in order to fetch two sets of data from their servers to provide us with all the data needed for current weather and a five day forecast.
 
 ## Challenges
 Overall this project was completed without any major headaches. Prior assignments and in-class instruction provided the tools and practice needed to build this page in a timely manner. Navigating the JSON objects returned by the API did take some time to determine which data points were needed to populate the HTML elements. The displayCity function by its completion became quite large at ~100 lines given how many new elements were being generated and the need to assign them bootstrap classes for styling.
