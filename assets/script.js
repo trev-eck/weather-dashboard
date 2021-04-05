@@ -24,7 +24,7 @@ function citySubmitHandler(event) {
 function getSelectedCity(theCity) {
     //generate the first API key with the selected city
     var apiUrl =
-        `http://api.openweathermap.org/data/2.5/weather?q=
+        `https://api.openweathermap.org/data/2.5/weather?q=
     ${theCity}&units=imperial&appid=ca0a6c1724abbeafa23dfc91590ac700`;
     //fetch the data and make sure its valid
     fetch(apiUrl).then(function (response) {
@@ -77,7 +77,7 @@ function displayCity(data, dataUV) {
     //lets add an icon to represent the weather
     var iconEl = document.createElement("img");
     iconEl.src =
-        "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+        "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
     iconEl.classlist = "card-img text-center";
     newBody.appendChild(iconEl);
 
