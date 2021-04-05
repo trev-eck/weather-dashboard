@@ -138,7 +138,7 @@ function displayCity(data, dataUV) {
         //lets create a weather icon for the card
         var forecastIcon = document.createElement("img");
         forecastIcon.src =
-            "http://openweathermap.org/img/wn/" +
+            "https://openweathermap.org/img/wn/" +
             dataUV.daily[i].weather[0].icon +
             ".png";
         forecastIcon.classList = "card-img";
